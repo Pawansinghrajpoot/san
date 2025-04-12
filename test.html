@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Sanjana ❤️</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      max-width: 90%;
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #fff;
+      margin-bottom: 30px;
+    }
+
+    .btns {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      min-width: 100px;
+    }
+
+    .yes {
+      background-color: #ff4e50;
+      color: #fff;
+    }
+
+    .no {
+      background-color: #fff;
+      color: #ff4e50;
+      position: absolute;
+    }
+
+    .hearts {
+      position: absolute;
+      bottom: -100px;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .heart {
+      width: 30px;
+      height: 30px;
+      background-color: red;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      animation: floatUp 5s linear infinite;
+      transform: rotate(45deg);
+      border-radius: 50% 50% 0 0;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      width: 30px;
+      height: 30px;
+      background-color: red;
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -15px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -15px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="main">
+    <h1 id="question">Sanjana, do you like me..?</h1>
+    <div class="btns">
+      <button class="yes" onclick="nextStage()">Yes</button>
+      <button class="no" id="noBtn" onmouseover="moveNo()" ontouchstart="moveNo()">No</button>
+    </div>
+  </div>
+
+  <div class="hearts" id="heartsContainer"></div>
+
+  <script>
+    let stage = 0;
+
+    const questions = [
+      "Sanju, do you love me..?💖",
+      "Sanju, will you marry me..?💖"
+    ];
+
+    function nextStage() {
+      if (stage < questions.length) {
+        document.getElementById('question').textContent = questions[stage];
+        stage++;
+      } else {
+        showHearts();
+        document.getElementById('main').innerHTML = `<h1>💖 I Love You, Sanju! 💖</h1>`;
+      }
+    }
+
+    function moveNo() {
+      const noBtn = document.getElementById("noBtn");
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 150);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    function showHearts() {
+      const container = document.getElementById("heartsContainer");
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+        heart.style.animationDelay = Math.random() + "s";
+        container.appendChild(heart);
+      }
+    }
+  </script>
+</body>
+</html>
